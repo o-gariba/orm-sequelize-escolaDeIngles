@@ -1,0 +1,12 @@
+const path = require('path')
+
+module.exports = {
+    'config': path.resolve('./api/config', 'config.json'),
+    'models-path': path.resolve('./api/models'),
+    'seeders-path': path.resolve('./api/seeders'),
+    'migrations-path': path.resolve('./api/migrations')
+}
+
+// Aqui usamos o pacote path para resolver os caminhos que estão as pastas que o sequelize-cli criou para nosso projeto
+
+// Essa estrutura de código foi fornecida pela documentação do sequelize: https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration
