@@ -30,6 +30,11 @@ app.listen(porta, () => console.log(`servidor rodando na porta ${porta}`))
 
 // Comando para criar uma nova tabela no sequelize: npx sequelize-cli model:create --name <NomeDaTabela> --attributes <atributo>:<tipoDeDado>,<atributo2>:<tipoDeDado>,...
 
+// IMPORTANTEE! Preciso alterar as informações que vem default da pasta config.json da pasta config (sequelize), colocando os dados corretos do meu MySql
+
+// Dpois fazemos a migração da tabela do sequelize para o mySql, com o seguinte comando:
+// npx sequelize-cli db:migrate
+
 module.exports = app
 
 
