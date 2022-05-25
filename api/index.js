@@ -64,3 +64,9 @@ module.exports = app
 // Dou um module exports no router (instancia de Router)
 
 // Dpois configuro o index.js mostrando que tenho uma nova rota definida no pessoasRoute, com app.use(pessoas), sendo pessoas o require('./pessoasRoute'). Posso excluir o get com '/' olá
+
+// Até o momento temos o R do CRUD (read)
+
+// Vamos criar no PessoasController um novo get para uma pessoa específica (id), p sequelize tem um método especifico pra isso o .findOne( { where: { id: Number(idRequerido) } } )
+
+// Agora vamos criar uma requisição de inscrição (C do CRUD) criaPessoa, dentro do PessoaController. Onde vai essas infos da pessoa a ser criada? Params no postman req.body
