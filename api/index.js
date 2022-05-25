@@ -59,3 +59,8 @@ module.exports = app
 // Crio entao uma pasta controller para criar as classes necessárias, que são: PessoasController (com os métodos para realizar o CRUD, primeiro para pegar todos os dados, método static para que o método seja chamado sem precisar criar uma nova instancia da classe, async)
 
 // Crio uma pasta para as rotas, com um index.js. Dentro do arquivo importo o bodyParser e crio uma arrow function que recebe app, usa o bodyParser.json() e tem um app.get('/', (req, res) => {...}) e vou limpando o index.js original (da aplicação que eu criei)
+
+// Continuando a ideia de separar responsabilidades, dentro da pasta routes crio o pessoasRoute, chamando Router (express) e o PessoaControler. Aqui configuro que a rota '/pessoas' faz o get definido no PessoaControler. Como defini no controller o método como estático, não preciso declara uma nova instancia de PessoaController aqui
+// Dou um module exports no router (instancia de Router)
+
+// Dpois configuro o index.js mostrando que tenho uma nova rota definida no pessoasRoute, com app.use(pessoas), sendo pessoas o require('./pessoasRoute'). Posso excluir o get com '/' olá

@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser')
+const pessoas = require('../routes/pessoasRoute')
 
 module.exports = app => {
     app.use(bodyParser.json())
-    app.get('/', (req, res) => res.send('olá, router funcionando!'))
+    app.use(pessoas)
 }
