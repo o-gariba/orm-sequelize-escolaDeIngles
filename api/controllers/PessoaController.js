@@ -48,7 +48,28 @@ class PessoaController {
             )
             return res.json(`Exclusão realizada com sucesso! O id ${idDesejado} não existe mais`)
         } catch (error) {
-            return res.status(500).json(error.message) 
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async atualizaDados(req, res) {
+        const { id } = req.params
+        const novosDados = req.body
+
+        try {
+            await database.Pessoas.update(novosDados, {
+                where: {
+                    id: Number(id)
+                }
+            })
+            const pessoaAtualizada = await database.Pessoas.findOne(
+                {
+                    where: { id: Number(id) }
+                }
+            )
+            return res.json(pessoaAtualizada)
+        } catch (error) {
+            return res.status(500).json(error.message)
         }
     }
 }

@@ -9,5 +9,6 @@ router.get('/pessoas/:idAbacate', PessoaControler.pegaUmaPessoa)
 // O : indica que virá um parametro dpois
 router.post('/pessoas', PessoaControler.criaPessoa)
 router.delete('/pessoas/:id', PessoaControler.deletaPessoa)
+router.put('/pessoas/:id', PessoaControler.atualizaDados)
 
 module.exports = router
