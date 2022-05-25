@@ -35,6 +35,22 @@ class PessoaController {
             return res.status(500).json(erro.message)
         }
     }
+
+    static async deletaPessoa(req, res) {
+        const idDesejado = req.params.id
+        try {
+            await database.Pessoas.destroy(
+                {
+                    where: {
+                        id: Number(idDesejado)
+                    }
+                }
+            )
+            return res.json(`Exclusão realizada com sucesso! O id ${idDesejado} não existe mais`)
+        } catch (error) {
+            return res.status(500).json(error.message) 
+        }
+    }
 }
 
 module.exports = PessoaController

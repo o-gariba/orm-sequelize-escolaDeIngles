@@ -70,3 +70,12 @@ module.exports = app
 // Vamos criar no PessoasController um novo get para uma pessoa específica (id), p sequelize tem um método especifico pra isso o .findOne( { where: { id: Number(idRequerido) } } )
 
 // Agora vamos criar uma requisição de inscrição (C do CRUD) criaPessoa, dentro do PessoaController. Onde vai essas infos da pessoa a ser criada? Params no postman req.body
+// No Postman, em body, selecionamos raw json e criamos um objeto com as seguintes chaves: nome, ativo, email e role (o id e as datas de criação e atualização são automáticas)
+
+// Terminando o CRUD falta o U (update) e o D (delete)
+
+// Para o update, vamos fazer um envio de dados no Postman e um id na url (requisição) para saber onde vamos corrigir. Uma diferença para outros métodos é que o update retorna true ou false, não um objeto inserido, por exemplo. Para retornar o registro atualizado fazemos um findOne com o id da pessoa atualizada
+// No postman e no pessoasRoute definimos o verbo como .put
+
+// Para deletar é mais fácil, pois só precisamos passar o id na url (req) e devolve uma mensagem customizada dizendo qual era o id. O metódo do sequelize para fazer uma exclusão é o .destroy( { where: { id: ...}})
+// O nome do método no pessoasRoute é .delete()
