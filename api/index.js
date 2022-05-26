@@ -79,3 +79,56 @@ module.exports = app
 
 // Para deletar é mais fácil, pois só precisamos passar o id na url (req) e devolve uma mensagem customizada dizendo qual era o id. O metódo do sequelize para fazer uma exclusão é o .destroy( { where: { id: ...}})
 // O nome do método no pessoasRoute é .delete()
+
+// Agora vamos criar as demais tabelas do esquema pronto, a próxima a ser criada vai ser a tabela que NÃO TEM FK (chave estrangeira), a tabela Niveis
+// npx sequelize-cli model:create --name Niveis --attributes descricao_nivel:string 
+
+// Dpois vamos criar a tabela Turma, que fornece uma chave para a tabela ainda não criada.
+// npx sequelize-cli model:create --name Turmas --attributes data_inicio:dateonly
+
+// Agora criamos a tabela Matricula, que usa chaves de todas as outras planilhas, cujo unico atributo natural é o status
+// npx sequelize-cli model:create --name Matriculas --attributes status:string
+
+// Curiosidade, as migrações vao ser rodadas na ordem de criação de cada uma, por isso os arquivos tem a especificidade do momento de criação. Por isso é importante entender a ordem de criação das tabelas referentes a quais chaves estrangeiras cada uma usa.
+
+// Agora precisamos pensar em como serão as associações entre cada tabela, e o sequelize tem métodos específicos para isso. Essas anotações ficam nos arquivos de MODELOS (o sequelize deixa um comentário no local que vamos escrever as relações)
+
+// Em pessoas criamos relação .hasMany() para models.Turmas e models.Matriculas. Obrigatoriamente precisamos usar .belongsTo()
+
+// Em níveis, hasMany model.Turmas
+
+// Turmas hasMany model.Matriculas. Turmas.belongsTo(models.Pessoas) e .Niveis
+
+// Matriculas belongsTo() Pessoas e Turmas
+
+// No msm método que falamos a relação entre tabelas colocamos um segundo parametro para falar qual será a chave estrangeira (fk) 
+// { foreignKey: 'nome' }
+
+// Agora precisamos informar nas tabelas quais serão as origens das fk's. Para isso, vemos todas as fk's declaradas nos hasMany, copiamos e colamos nos belongs to referenciados inicialmente
+
+// Na pasta migrations colocamos na mão as colunas que mencionamos anteriormente, que conecta as tabelas (fk). Colocamos, no local que quisermos:
+/* 
+        <nome_coluna>: {
+                allowNull: false,
+                type: Sequelize.Integer (pois todos os id's são números, nosso exemplo)
+                references: {
+                        model:'<nomeDaTabelaReferenciada>', 
+                        key: 'id'
+                }
+        }
+*/
+
+// No arquivo migrations>turmas coloco: docente_id e nivel_id
+
+// Em matriculas coloco: estudante_id e turma_id
+
+// Agora sim posso rodar as migrações no terminal
+// npx sequelize-cli db:migrate
+
+// Precisamos agora criar controladores e rotas para popular as tabelas e usar as funçoes do CRUD. Vamos usar novamente o sequelize-cli para gerar seeds
+// npx sequelize-cli seed:generate --name demo-nível
+// ... demo-turmas
+// ... demo-matriculas
+
+// dpois de popular os seeders, posso rodar o comando
+// npx sequelize-cli db:seed:all
