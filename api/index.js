@@ -132,3 +132,9 @@ module.exports = app
 
 // dpois de popular os seeders, posso rodar o comando
 // npx sequelize-cli db:seed:all
+
+/* 
+
+Definimos agora os arquivos controller e routes para os níveis e as turmas (pq só os dois?)
+
+*/
