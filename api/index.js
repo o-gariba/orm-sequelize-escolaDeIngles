@@ -141,4 +141,6 @@ Para as matrículas temos um caso especial, pois eles precisam partir de uma pes
 
 > > {{local}}/pessoas/3/matriculas/2
 
+Vamos criar agora o método de criar nova matrícula, pegando o ID da pessoa pela URL, os demais dados (status e turma_id) pelo body e fazer a junção usando spread operator.
+
 */
