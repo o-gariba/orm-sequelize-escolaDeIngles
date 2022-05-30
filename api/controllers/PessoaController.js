@@ -91,21 +91,62 @@ class PessoaController {
     }
 
     static async criaMatriculaParaPessoa(req, res) {
-            const { idPessoa } = req.params
-            const dadosDaMatricula = req.body
+        const { idPessoa } = req.params
+        const dadosDaMatricula = req.body
 
-            try {
-                const matriculaCriada = await database.Matriculas.create(
-                    {
-                        ...dadosDaMatricula,
-                        estudante_id: Number(idPessoa)
-                    }
-                )
-                return res.json(matriculaCriada)
-            } catch (error) {
-                return res.status(500).json(error)
-            }
+        try {
+            const matriculaCriada = await database.Matriculas.create(
+                {
+                    ...dadosDaMatricula,
+                    estudante_id: Number(idPessoa)
+                }
+            )
+            return res.json(matriculaCriada)
+        } catch (error) {
+            return res.status(500).json(error)
         }
+    }
+
+    static async alteraMatriculaPeloIdPessos(req, res) {
+        const { idPessoa, idMatricula } = req.params
+        const novosDados = req.body
+
+        try {
+            await database.Matriculas.update(novosDados, {
+                where: {
+                    id: Number(idMatricula),
+                    estudante_id: Number(idPessoa)
+                }
+            })
+            const matriculaAlterada = await database.Matriculas.findOne({
+                where: {
+                    id: Number(idMatricula)
+                }
+            })
+
+            return res.json(matriculaAlterada)
+        } catch (error) {
+            res.status(500).json(error)            
+        }
+    }
+
+    static async deletaMatriculaPorIdPessoa(req, res) {
+        const { idMatricula } = req.params
+
+        try {
+            await database.Matriculas.destroy(
+                {
+                    where: {
+                        id: Number(idMatricula)
+                    }
+                }
+            )
+            return res.json(`Exclusão realizada com sucesso! O id ${idMatricula} não existe mais`)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+
 }
 
 module.exports = PessoaController
