@@ -137,4 +137,8 @@ module.exports = app
 
 Definimos agora os arquivos controller e routes para os níveis e as turmas (pq só os dois?)
 
+Para as matrículas temos um caso especial, pois eles precisam partir de uma pessoa, não faz sentido acessar matriculas especificas (id pessoa e id matricula). Ex:
+
+> > {{local}}/pessoas/3/matriculas/2
+
 */

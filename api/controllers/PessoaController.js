@@ -72,6 +72,23 @@ class PessoaController {
             return res.status(500).json(error.message)
         }
     }
+
+    static async pegaInfosPorMatriculaEIdPessoa(req, res) {
+        const { idPessoa, idMatricula } = req.params
+        try {
+            const umaMatricula = await database.Matriculas.findOne(
+                {
+                    where: {
+                        id: Number(idMatricula),
+                        estudante_id: Number(idPessoa)
+                    }
+                }
+            )
+            return res.json(umaMatricula)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
 }
 
 module.exports = PessoaController
