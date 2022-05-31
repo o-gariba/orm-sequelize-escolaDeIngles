@@ -179,4 +179,21 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
 
         Para usarmos os scopes definimos novas regras no controller. no get default vamos renomear para pegaPessoasAtivas, e no novo método, que agora sim é um pegaTodasAsPessoas, a diferença agora é que definimos:
         .... await = adatabase.Pessoas.scope('todos').findAll(....)
+
+        Existe um comando no mysql CHECK, que faz uma espécie de ENUM (defini os inputs válidos, validations e constrains no sequelize). O sequelize tem inclusive uma validação para e-mail já pronta.
+
+        No modelo da tabela, ao inves de ter somente datatype, escrevemos:
+        ...
+        email: { 
+                type: DataTypes.STRING,
+                validate: {
+                        funcaoValidadora: function(dado){
+                                if(dado.length < 3) throw new Error('o campo deve ter ....')
+                        }
+                        isEmail: {
+                                args: true,
+                                msg: 'dado do tipo e-mail inválido'
+                        }
+                }
+        },
  */
