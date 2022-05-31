@@ -14,5 +14,6 @@ router.get('/pessoas/:idPessoa/matriculas/:idMatricula', PessoaControler.pegaInf
     .post('/pessoas/:idPessoa/matriculas', PessoaControler.criaMatriculaParaPessoa)
     .put('/pessoas/:idPessoa/matriculas/:idMatricula', PessoaControler.alteraMatriculaPeloIdPessos)
     .delete('/pessoas/:idPessoa/matriculas/:idMatricula', PessoaControler.deletaMatriculaPorIdPessoa)
+    .post('/pessoas/:id/restaurar', PessoaControler.restauraPessoa)
 
 module.exports = router

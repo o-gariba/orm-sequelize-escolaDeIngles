@@ -53,6 +53,23 @@ class TurmaController {
         }
     }
 
+    static async restauraTurma(req, res) {
+        const { id } = req.params
+
+        try {
+            await database.Turmas.restore(
+                {
+                    where: {
+                        id: Number(id)
+                    }
+                }
+            )
+            return res.json({mensagem: `A turma com id: ${id} foi restaurada no sistema`})
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+
     static async atualizaTurma(req, res) {
         const { id } = req.params
         const dadosNovos = req.body

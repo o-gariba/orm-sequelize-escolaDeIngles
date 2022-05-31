@@ -53,6 +53,23 @@ class NivelController {
         }
     }
 
+    static async restauraNivel(req, res) {
+        const { id } = req.params
+
+        try {
+            await database.Niveis.restore(
+                {
+                    where: {
+                        id: Number(id)
+                    }
+                }
+            )
+            return res.json({mensagem: `O nível com id: ${id} foi restaurado no sistema`})
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+
     static async atualizaDados(req, res) {
         const { id } = req.params
         const novosDados = req.body

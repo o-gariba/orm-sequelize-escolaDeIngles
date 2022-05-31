@@ -143,4 +143,29 @@ Para as matrículas temos um caso especial, pois eles precisam partir de uma pes
 
 Vamos criar agora o método de criar nova matrícula, pegando o ID da pessoa pela URL, os demais dados (status e turma_id) pelo body e fazer a junção usando spread operator.
 
+Faltou criar uma rota para alteração e outra para exclusão, muito similares as rotas já criadas
+
 */
+
+// INICIO DO CURSO PARTE 2
+
+/* 
+        Precisamos mudar uma linha nos modelos das tabelas para fazer o soft delete (paranoid, pelo sequelize)
+        
+        Vamos add uma nova coluna na tabela pessoas, para funcionar como um soft delete (indicar que a pessoa foi deletada sem remover ela permanentemente do bd), para isso, criamos um novo migrattion table de pessoas com a data atual, na mão, e no lugar de createTable usamos o método .addColumn('Pessoas', 'deletedAt', {<parametros da coluna>})
+
+        a nova coluna vai ser:
+        - allownull: true,
+        - type: Sequelize.DATE
+
+        (do down tmb menciono a coluna nova como um 2o parametro)
+
+        faço isso em todas as demais tabelas e dpois rodo o comando:
+        npx sequelize-cli db:migrate
+        
+        Dpois posso deletar e ver se deu certo (postman não mostra os soft deletes)
+
+
+        No controllerPessoa vamos criar um método para restaurar uma pessoa, o método vai usar o .restore, passando o id necessário para fazer o restore.
+        Dpois crio uma rota com .../pessoas/:id/restaura
+ */
