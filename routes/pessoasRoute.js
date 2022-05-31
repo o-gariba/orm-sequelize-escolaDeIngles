@@ -6,6 +6,7 @@ const router = Router()
 
 router.get('/pessoas', PessoaControler.pegaTodasAsPessoasAtivas)
     .get('/pessoas/todas', PessoaControler.pegaTodasAsPessoas)
+    .get('/pessoas/:id/matriculas', PessoaControler.pegaMatriculasAtivasPorIdPessoa)
 router.get('/pessoas/:idAbacate', PessoaControler.pegaUmaPessoa)
 // O : indica que virá um parametro dpois
 router.post('/pessoas', PessoaControler.criaPessoa)

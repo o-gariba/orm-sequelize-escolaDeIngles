@@ -98,6 +98,24 @@ class PessoaController {
             return res.status(500).json(error.message)
         }
     }
+    
+    static async pegaMatriculasAtivasPorIdPessoa(req, res) {
+        const { id } = req.params
+
+        try {
+            const pessoa = await database.Pessoas.findOne(
+                {
+                    where: {
+                        id: Number(id)
+                    }
+                }
+            )
+            const matriculas = await pessoa.getAulasMatriculadas()
+            return res.json(matriculas)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
 
     static async pegaInfosPorMatriculaEIdPessoa(req, res) {
         const { idPessoa, idMatricula } = req.params

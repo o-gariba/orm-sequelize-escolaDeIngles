@@ -196,4 +196,15 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
                         }
                 }
         },
+
+        Escopo de associação: na associação definida no modelo das tabelas podemos passar uma instrução para cruzar dados. Dentro do:
+         Pessoas.hasMany(..Matriculas...) {
+                ....
+                scope: { status: confirmado },
+                as: 'aulasMatriculadas'
+        }
+
+        Dpois precisamos terminar de configurar a nova busca no controller de pessoas
+
+        Vamos criar um método no pessoasController para pegar todas as matrículas de uma pessoa, a partir da id da pessoa. No findOne o parametro de busca é o id estudante e usamos um getter (getAulasMatriculadas) gerado no scopo do modelo pessoas. Uma nova rota vai ser criada
  */
