@@ -168,4 +168,15 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
 
         No controllerPessoa vamos criar um método para restaurar uma pessoa, o método vai usar o .restore, passando o id necessário para fazer o restore.
         Dpois crio uma rota com .../pessoas/:id/restaura
+
+        Escopos no sequelize serve para utilizarmos "filtros", definindo quai registros podem aparecer ou não. Para aparecerem apenas as pessoas ativas, posso fazer um defaultScope no model pessoa, definimos essa propriedade após o paranoid 
+
+        Para add um segundo escopo, definimos, no msm local do defaultscope:
+        scopes: {
+                todos: { where: {} },
+                // etc ...
+        }
+
+        Para usarmos os scopes definimos novas regras no controller. no get default vamos renomear para pegaPessoasAtivas, e no novo método, que agora sim é um pegaTodasAsPessoas, a diferença agora é que definimos:
+        .... await = adatabase.Pessoas.scope('todos').findAll(....)
  */
