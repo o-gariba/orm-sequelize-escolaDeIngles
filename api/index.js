@@ -218,4 +218,8 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
 
         Faremos um novo método de get, usando um método do sequelize .findAndCountAll( { where: { turma_id: Number(id), status: 'confirmado' } })
 
+        Nosso próximo passo vai ser contar quantas turmas estão lotadas no bd, agrupando as contagens que o sequelize faz com o findAndCountAll()
+
+        agr vamos criar um método que cancela uma pessoa e consequentemente todas as suas matrículas. Primeiro update status para false, dpois um update na matricula para cancelado 
+
  */
