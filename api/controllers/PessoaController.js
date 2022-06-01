@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize')
 const database = require('../models')
 
 class PessoaController {
@@ -72,7 +73,7 @@ class PessoaController {
                     }
                 }
             )
-            return res.json({mensagem: `A pessoa com id: ${id} foi restaurada no sistema`})
+            return res.json({ mensagem: `A pessoa com id: ${id} foi restaurada no sistema` })
         } catch (error) {
             return res.status(500).json(error)
         }
@@ -98,7 +99,7 @@ class PessoaController {
             return res.status(500).json(error.message)
         }
     }
-    
+
     static async pegaMatriculasAtivasPorIdPessoa(req, res) {
         const { id } = req.params
 
@@ -170,7 +171,7 @@ class PessoaController {
 
             return res.json(matriculaAlterada)
         } catch (error) {
-            res.status(500).json(error)            
+            res.status(500).json(error)
         }
     }
 
@@ -186,6 +187,44 @@ class PessoaController {
                 }
             )
             return res.json(`Exclusão realizada com sucesso! O id ${idMatricula} não existe mais`)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+
+    static async pegaTodasAsMatriculasPorTurma(req, res) {
+        const { id } = req.params
+
+        try {
+            const resultados = await database.Matriculas.findAndCountAll(
+                {
+                    where: {
+                        turma_id: Number(id),
+                        status: 'confirmado'
+                    }
+                }
+            )
+            return res.json(resultados)
+        } catch (error) {
+            return res.status(500).json(error)
+        }
+    }
+
+    static async pegaTurmasLotadas(req, res) {
+        const lotacao = 2
+
+        try {
+            const turmasLotadas = await database.Matriculas.findAndCountAll(
+                {
+                    where: {
+                        status: 'confirmado'
+                    },
+                    attributes: ['turma_id'],
+                    group: ['turma_id'],
+                    having: Sequelize.literal(`COUNT(turma_id) >= ${lotacao}`)
+                }
+            )
+            return res.json(turmasLotadas.count)
         } catch (error) {
             return res.status(500).json(error)
         }

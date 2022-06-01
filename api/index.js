@@ -210,4 +210,12 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
 
         Usando operadores do MySQL e do Sequelize: no controller turma importo o Sequelize e o Op (operadores do sequelize). Dentro do método do findAll agora passo uma validação. As datas descritas para fazer a validação vão vir do req.query
 
+        definimos o nome dos parametros que virão da URL (queries), passando o msm nome na url. Usaremos os operadores Op.gte e Op.lte (maior ou igual a, menor ou igual a)
+
+        Fazemos tmb uma validação prévia, usando ternário para 
+
+        Agora vamos verificar o número de matrículas por turma, dpois fazer uma validação de limite de matriculas em uma turma
+
+        Faremos um novo método de get, usando um método do sequelize .findAndCountAll( { where: { turma_id: Number(id), status: 'confirmado' } })
+
  */
