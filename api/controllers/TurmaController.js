@@ -1,10 +1,31 @@
+const { Op } = require('sequelize')
 const database = require('../models')
 
 class TurmaController {
 
     static async pegaTodasAsTurmas(req, res) {
+
+        const { data_inicial, data_final } = req.query
+        const validacoes = {}
+        data_inicial || data_final ? validacoes.data_inicio = {} : null
+        data_inicial ? validacoes.data_inicio[Op.gte] = data_inicial : null
+        data_final ? validacoes.data_inicio[Op.lte] = data_final : null
+
+        /**
+         * como o validações foi idealizado?
+         * 
+         * {
+         *  validacoes: {
+         *      data_inicio: {
+         *          [Op.gte]: dataRecebidaNaQuery,
+         *          [Op.lte]: dataRece...
+         *      } 
+         *  }
+         * }
+         */
+        
         try {
-            const todasAsTurmas = await database.Turmas.findAll()
+            const todasAsTurmas = await database.Turmas.findAll({ where: validacoes })
             return res.status(200).json(todasAsTurmas)
         } catch (error) {
             return res.status(500).json(error.message);

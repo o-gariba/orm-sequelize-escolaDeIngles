@@ -207,4 +207,7 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
         Dpois precisamos terminar de configurar a nova busca no controller de pessoas
 
         Vamos criar um método no pessoasController para pegar todas as matrículas de uma pessoa, a partir da id da pessoa. No findOne o parametro de busca é o id estudante e usamos um getter (getAulasMatriculadas) gerado no scopo do modelo pessoas. Uma nova rota vai ser criada
+
+        Usando operadores do MySQL e do Sequelize: no controller turma importo o Sequelize e o Op (operadores do sequelize). Dentro do método do findAll agora passo uma validação. As datas descritas para fazer a validação vão vir do req.query
+
  */
