@@ -222,4 +222,12 @@ Faltou criar uma rota para alteração e outra para exclusão, muito similares a
 
         agr vamos criar um método que cancela uma pessoa e consequentemente todas as suas matrículas. Primeiro update status para false, dpois um update na matricula para cancelado 
 
+        Transaction: metodo do sequelize que recebe um callback (função que quero executar) e começa a "vigiar" os métodos já feitos, para reverter a ação caso de algum erro. Vamos fazer isso no úlimo método criado, que altera valores em 2 tabelas diferentes
+        
+        Enquanto nossa aplicação é pequena, o mvc basta e consegue manejar tudo. Mas se ela cresce, os controllers passa a fazer mtas coisas, o que não é legal para manutenção e legibilidade. Para resolver isso criaremos uma nova camada no MVC, chamada dde SERVIÇOS, que vai concentrar os métodos do sequelize que escrevem as queries.
+
+        Dentro da api vamos criar a pasta services, com Services.js. Importa database (models) e criamos uma classe com os métodos comuns dos controllers. Para os métodos específicos, criaremos um service.js específico
+        
+        criaremos tmb um index.js que importa e exporta todos os ...Services que foram criados, para facilitar a importação nos controllers
+        
  */

@@ -4,8 +4,8 @@ const PessoaControler = require('../api/controllers/PessoaController')
 
 const router = Router()
 
-router.get('/pessoas', PessoaControler.pegaTodasAsPessoasAtivas)
-    .get('/pessoas/todas', PessoaControler.pegaTodasAsPessoas)
+router.get('/pessoas', PessoaControler.pegaTodasAsPessoas)
+    .get('/pessoas/ativas', PessoaControler.pegaTodasAsPessoasAtivas)
     .get('/pessoas/:id/matriculas', PessoaControler.pegaMatriculasAtivasPorIdPessoa)
     .get('/pessoas/matriculas/:id/confirmadas', PessoaControler.pegaTodasAsMatriculasPorTurma)
     .get('/pessoas/matriculas/lotadas', PessoaControler.pegaTurmasLotadas)
